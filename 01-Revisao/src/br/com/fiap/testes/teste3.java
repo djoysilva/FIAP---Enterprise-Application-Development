@@ -29,9 +29,13 @@ public class teste3 {
 						listaTablet.add(tablet);
 						break;
 				
-				case 2:	for(Tablet novoTablet : listaTablet){
-							JOptionPane.showMessageDialog(null, "O valor do produto: " + novoTablet.getModelo() + 
-																" é: " + novoTablet.getPreco());
+				case 2:	if(listaTablet.isEmpty()){
+							JOptionPane.showMessageDialog(null, "Lista vazia");
+						}else{
+							for(Tablet novoTablet : listaTablet){
+								JOptionPane.showMessageDialog(null, "O valor do produto: " + novoTablet.getModelo() + 
+																	" é: " + novoTablet.getPreco());
+							}
 						}
 						break;
 						
