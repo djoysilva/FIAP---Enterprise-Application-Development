@@ -14,9 +14,11 @@ public class teste2 {
 	public static void main(String args[]){
 		List<Livro> listaLivros = new ArrayList<Livro>();
 		SimpleDateFormat formatarData = new SimpleDateFormat("dd/MM/yyyy");
-		
+		SimpleDateFormat dataNova = new SimpleDateFormat();
+
 		for(int i = 0; i<3; i++){
 			Livro livro = new Livro();
+
 			
 			livro.setCodigo(Integer.parseInt(JOptionPane.showInputDialog("Código?")));
 			livro.setTitulo(JOptionPane.showInputDialog("Título?"));
@@ -24,12 +26,12 @@ public class teste2 {
 			livro.setAutor(JOptionPane.showInputDialog("Autor?"));
 			livro.setEditora(JOptionPane.showInputDialog("Editora?"));
 			livro.setData(Calendar.getInstance());
-			
+
 			listaLivros.add(livro);
 		}
 		
 		for(Livro novoLivro : listaLivros){
-			String livroDataFormatada = new String(formatarData.format(novoLivro.getData().getTime()));
+			String livroDataFormatada = new String(formatarData.format(novoLivro.getData().getTime());
 			
 			JOptionPane.showMessageDialog(null, 
 										"\nCódigo: " + novoLivro.getCodigo() +

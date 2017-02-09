@@ -55,6 +55,6 @@ public class Tablet extends Produto implements Eletronico{
 	@Override
 	public double calcularGarantia() {
 		// TODO Auto-generated method stub
-		return this.getPreco() + (this.getPreco() * 0.05);
+		return this.getPreco() * 0.05;
 	}
 }
