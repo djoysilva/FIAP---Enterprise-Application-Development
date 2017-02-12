@@ -15,7 +15,7 @@ public class TerminalConsulta {
 					sdf.format(Calendar.getInstance().getTime()));
 		System.out.println("********************************");
 		
-		System.out.print("Digite o código: ");
+		System.out.print("Digite o codigo: ");
 		int codigo = scanner.nextInt();
 		
 		switch (codigo) {
@@ -26,7 +26,7 @@ public class TerminalConsulta {
 			System.out.println("Camiseta Feminina Manga Longa Rosa");
 			break;
 		default:
-			System.out.println("Produto não cadastrado!");
+			System.out.println("Produto nï¿½o cadastrado!");
 			break;
 		}
 		

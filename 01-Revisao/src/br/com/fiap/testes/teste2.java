@@ -31,7 +31,7 @@ public class teste2 {
 		}
 		
 		for(Livro novoLivro : listaLivros){
-			String livroDataFormatada = new String(formatarData.format(novoLivro.getData().getTime());
+			String livroDataFormatada = new String(formatarData.format(novoLivro.getData().getTime()));
 			
 			JOptionPane.showMessageDialog(null, 
 										"\nCódigo: " + novoLivro.getCodigo() +
