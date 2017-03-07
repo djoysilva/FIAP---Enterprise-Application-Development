@@ -1,0 +1,20 @@
+JPA | Hibernate - ORM - Mapeamento Objeto - Relacional
+
+@Entity
+@Id
+@Table
+@Lob
+@Temporal
+@Column
+@GeneratedValue
+@SequenceGenerator
+@Transient
+
+Entity Manager
+
+C- Persistent
+R- find
+U - merge
+D - Remove
+
+Refresh
