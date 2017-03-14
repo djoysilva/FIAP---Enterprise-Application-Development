@@ -2,6 +2,7 @@ package br.com.fiap.entity;
 
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,44 +16,34 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "TB_PROJETO_AM")
-@SequenceGenerator(name = "seqCodigo", sequenceName = "SEQ_TB_PROJETO_AM", allocationSize = 1)
+@Table(name="TB_PROJETO_AM")
+@SequenceGenerator(name="seqProjeto",
+sequenceName="SQ_TB_PROJETO_AM",allocationSize=1)
 public class ProjetoAm {
-	
+
 	@Id
-	@Column(name = "CD_PROJETO", nullable = false)
-	@GeneratedValue(generator = "seqCodigo", strategy = GenerationType.SEQUENCE)
+	@Column(name="CD_PROJETO")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,
+	generator="seqProjeto")
 	private int codigo;
 	
-	@Column(name = "NM_PROJETO", length = 100, nullable = false)
+	@Column(name="NM_PROJETO",nullable=false,length=100)
 	private String nome;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name = "DT_ENTREGA", nullable = false)
+	@Column(name="DT_ENTREGA",nullable=false)
 	private Calendar dataEntrega;
 	
-	@Column(name = "VL_NOTA")
+	@Column(name="VL_NOTA")
 	private float nota;
 	
-	@Column(name = "DS_OBSERVACAO")
+	@Column(name="DS_OBSERVACAO")
 	private String observacoes;
 	
-	@OneToOne
+	//cascade -> replic a ação da entidade no relacionamento.
+	@OneToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="FK_CD_GRUPO")
 	private GrupoAm grupo;
-
-	public ProjetoAm(int codigo, String nome, Calendar dataEntrega, float nota, String observacoes) {
-		super();
-		this.codigo = codigo;
-		this.nome = nome;
-		this.dataEntrega = dataEntrega;
-		this.nota = nota;
-		this.observacoes = observacoes;
-	}
-
-	public ProjetoAm() {
-		super();
-	}
 
 	public int getCodigo() {
 		return codigo;
@@ -78,6 +69,19 @@ public class ProjetoAm {
 		this.dataEntrega = dataEntrega;
 	}
 
+	public ProjetoAm() {
+		super();
+	}
+
+	public ProjetoAm(int codigo, String nome, Calendar dataEntrega, float nota, String observacoes) {
+		super();
+		this.codigo = codigo;
+		this.nome = nome;
+		this.dataEntrega = dataEntrega;
+		this.nota = nota;
+		this.observacoes = observacoes;
+	}
+
 	public float getNota() {
 		return nota;
 	}
@@ -93,6 +97,13 @@ public class ProjetoAm {
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
 	}
-	
+
+	public GrupoAm getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(GrupoAm grupo) {
+		this.grupo = grupo;
+	}
 	
 }

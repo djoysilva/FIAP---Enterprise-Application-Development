@@ -5,11 +5,12 @@ import javax.persistence.EntityManager;
 import br.com.fiap.dao.ProjetoAmDAO;
 import br.com.fiap.entity.ProjetoAm;
 
-public class ProjetoAmDAOimpl extends GenericDAOImpl<ProjetoAm, Integer> implements ProjetoAmDAO{
+public class ProjetoAmDAOImpl 		
+			extends GenericDAOImpl<ProjetoAm, Integer>
+									implements ProjetoAmDAO {
 
-	public ProjetoAmDAOimpl(EntityManager em) {
+	public ProjetoAmDAOImpl(EntityManager em) {
 		super(em);
-		
 	}
-	
+
 }
