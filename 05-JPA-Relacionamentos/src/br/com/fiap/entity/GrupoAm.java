@@ -1,13 +1,17 @@
 package br.com.fiap.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -29,11 +33,18 @@ public class GrupoAm {
 	private String nome;
 	//Relacionamento bi-direcional
 	//mappedBy -> nome do atributo que mapeia o relacionamento (na classe ProjetoAm)
-	@OneToOne(mappedBy = "grupo", fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "grupo", fetch = FetchType.LAZY, cascade=CascadeType.PERSIST)
 	private ProjetoAm projeto;
 	
-	@OneToMany(mappedBy="grupo")
+	@OneToMany(mappedBy="grupo", cascade=CascadeType.PERSIST)
 	private List<Aluno> alunos;
+	
+	public void addAluno(Aluno aluno){
+		//Adiciona o aluno na lista de alunos
+		alunos.add(aluno);
+		//Seta o grupo do aluno
+		aluno.setGrupo(this);	
+	}
 	
 	public GrupoAm() {
 		super();
@@ -43,6 +54,7 @@ public class GrupoAm {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
+		alunos = new ArrayList<Aluno>();
 	}
 
 	public int getCodigo() {
@@ -69,4 +81,12 @@ public class GrupoAm {
 		this.nome = nome;
 	}
 	
+	public List<Aluno> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}
+
 }
