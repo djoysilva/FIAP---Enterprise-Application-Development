@@ -32,7 +32,7 @@ public class Professor {
 	@Temporal(TemporalType.DATE)
 	private Calendar dataAdmissao;
 
-	@ManyToMany(mappedBy="professores", cascade = CascadeType.PERSIST)
+	@ManyToMany(mappedBy="professor", cascade = CascadeType.PERSIST)
 	private List<Aluno> alunos;
 	
 	public Professor() {
