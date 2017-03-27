@@ -1,23 +1,27 @@
 package br.com.fiap.entity;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@SequenceGenerator(name="seqIdAutor", sequenceName="SEQ_ID_AUTOR", allocationSize=1)
+@SequenceGenerator(name="seqTbAutor", sequenceName="SEQ_TB_AUTOR", allocationSize=1)
 public class Autor {
 	
 	@Id
 	@Column(nullable = false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seqIdAutor")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seqTbAutor")
 	private int id;
 	
 	@Column(nullable = false)
@@ -31,6 +35,11 @@ public class Autor {
 	
 	@Temporal(TemporalType.DATE)
 	private Calendar dt_nascimento;
+	
+	@ManyToMany
+	@JoinTable(name="Autor_Livro", joinColumns = {@JoinColumn(name="isbn")},
+	inverseJoinColumns={@JoinColumn(name="id")})
+	private List<Livro> livros;
 
 	public Autor() {
 		super();
@@ -85,5 +94,11 @@ public class Autor {
 		this.dt_nascimento = dt_nascimento;
 	}
 	
-	
+	public List<Livro> getLivros() {
+		return livros;
+	}
+
+	public void setLivros(List<Livro> livros) {
+		this.livros = livros;
+	}
 }

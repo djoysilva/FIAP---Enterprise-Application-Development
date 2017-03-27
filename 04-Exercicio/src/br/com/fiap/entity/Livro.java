@@ -2,18 +2,28 @@ package br.com.fiap.entity;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@SequenceGenerator(name="seqLivro",sequenceName="SEQ_TB_LIVRO", allocationSize=1)
 public class Livro implements Serializable{
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqLivro")
 	@Column(nullable = false)
 	private int isbn;
 	
@@ -27,7 +37,16 @@ public class Livro implements Serializable{
 	
 	@Lob
 	private byte[] capa;
+	
+	@ManyToMany
+	@JoinTable(name="Autor_Livro", joinColumns = {@JoinColumn(name="id")},
+	inverseJoinColumns={@JoinColumn(name="isbn")})
+	private List<Autor> autores;
 
+	@ManyToOne
+	@JoinColumn(name="id")
+	private Editora editora_id; 
+	
 	public Livro() {
 		super();
 	}
@@ -69,6 +88,18 @@ public class Livro implements Serializable{
 	public void setCapa(byte[] capa) {
 		this.capa = capa;
 	}
+	public List<Autor> getAutores() {
+		return autores;
+	}
+	public void setAutores(List<Autor> autores) {
+		this.autores = autores;
+	}
 	
+	public Editora getEditora() {
+		return editora_id;
+	}
+	public void setEditora(Editora editora_id) {
+		this.editora_id = editora_id;
+	}
 	
 }

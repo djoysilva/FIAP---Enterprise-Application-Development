@@ -12,12 +12,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="EDITORA")
-@SequenceGenerator(name="seqIdEditora", sequenceName="SQ_ID_EDITORA", allocationSize=1)
+@SequenceGenerator(name="seqTbEditora", sequenceName="SQ_TB_EDITORA", allocationSize=1)
 
 public class Editora implements Serializable{
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqIdEditora")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqTbEditora")
 	@Column(nullable = false)
 	private int id;
 	
