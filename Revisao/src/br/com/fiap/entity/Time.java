@@ -1,12 +1,20 @@
 package br.com.fiap.entity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -33,9 +41,23 @@ public class Time {
 	@Column(name="NR_TITULO")
 	private int titulo;
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
+	@JoinColumn(name="CD_TECNICO")
 	private Tecnico tecnico;
-
+	
+	@OneToMany(mappedBy = "time", cascade=CascadeType.PERSIST)
+	private List<Jogador> jogadores = new ArrayList<>();
+	
+	@ManyToMany(cascade=CascadeType.PERSIST)
+	@JoinTable(name="TB_TIME_CAMPEONATO", joinColumns=@JoinColumn(name="CD_TIME"),
+	inverseJoinColumns=@JoinColumn(name="CD_TIME"))
+	private List<Campeonato> campeonatos;
+	
+	public void addJogador(Jogador jogador){
+		jogadores.add(jogador);
+		jogador.setTime(this);
+	}
+	
 	public Time(int codigo, String nome, Calendar dataFundacao, int titulo) {
 		super();
 		this.codigo = codigo;
