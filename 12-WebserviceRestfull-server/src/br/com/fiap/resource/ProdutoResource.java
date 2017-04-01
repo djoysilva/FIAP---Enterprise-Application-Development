@@ -1,5 +1,6 @@
 package br.com.fiap.resource;
 
+
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -21,16 +22,14 @@ import br.com.fiap.to.ProdutoTO;
 
 @Path("/produto")
 public class ProdutoResource {
-	
-	private ProdutoBO bo = new ProdutoBO();
-	ProdutoTO produto = new ProdutoTO();
 
+	private ProdutoBO bo = new ProdutoBO();
 	
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProdutoTO buscar(@PathParam("id") int codigo){
-		produto = bo.buscar(codigo); 
+		ProdutoTO produto = bo.buscar(codigo);
 		return produto;
 	}
 	
@@ -42,30 +41,35 @@ public class ProdutoResource {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response cadastrar(ProdutoTO produto, @Context UriInfo nomeParamUrl){
+	public Response cadastrar(ProdutoTO produto,
+			@Context UriInfo uriInfo){
 		bo.cadastrar(produto);
 		//Construir a URL para acessar o produto criado
-		UriBuilder url = UriBuilder.fromPath(nomeParamUrl.getPath());
+		UriBuilder url = UriBuilder.fromPath(uriInfo.getPath());
 		url.path(String.valueOf(produto.getCodigo()));
-		
 		//Status 201 - Created
 		return Response.created(url.build()).build();
 	}
 	
 	@PUT
-	@Path("{id}")
+	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response atualizar(ProdutoTO produto, @PathParam("id") int codigo){
+	public Response atualizar(ProdutoTO produto, 
+		 					@PathParam("id") int codigo){
 		produto.setCodigo(codigo);
 		bo.alterar(produto);
 		return Response.ok().build();
 	}
 	
+	//Remover
 	@DELETE
-	@Path("{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response remover(@PathParam("id") int codigo){
+	@Path("/{id}")
+	public void remover(@PathParam("id") int codigo){
 		bo.remover(codigo);
-		return Response.ok().build();
 	}
+	
 }
+
+
+
+
