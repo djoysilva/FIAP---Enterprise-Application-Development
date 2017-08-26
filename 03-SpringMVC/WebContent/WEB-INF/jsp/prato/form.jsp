@@ -1,31 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de pratos</title>
-</head>
-<body>
+    
+<%@ taglib prefix="tag" tagdir="/WEB-INF/tags"%>
+
+<tag:template title="Cadastrar Pratos">
+	<h1>Cadastrar</h1>
 	<FORM action="cadastrar" method="post">
-		<div>
+		<div class="form-group">
 			<LABEL for="Nome">Nome</LABEL>
-			<INPUT type="text" id="Nome" name="nome"/>
+			<INPUT type="text" id="Nome" name="nome" class="form-control"/>
 		</div>	
 		
-		<div>
+		<div class="form-group">
 			<LABEL for="Preco">Preço</LABEL>
-			<INPUT type="text" id="Preco" name="preco"/>			
+			<INPUT type="text" id="Preco" name="preco" class="form-control"/>			
 		</div>	
 		
-		<div>
+		<div class="form-group">
 			<LABEL for="Peso">Peso</LABEL>
-			<INPUT type="text" id="Peso" name="peso"/>		
+			<INPUT type="text" id="Peso" name="peso" class="form-control"/>		
 		</div>
 
-		<div>	
-			<INPUT type="submit" value="CADASTRAR"/>
+		<div class="form-group">	
+			<INPUT type="submit" value="CADASTRAR" class="btn btn-primary"/>
 		</div>
 	</FORM>
-</body>
-</html>
+</tag:template>
+
